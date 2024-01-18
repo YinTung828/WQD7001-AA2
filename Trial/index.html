@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+</head>
+<body>
+<h1>Dash Web App</h1>
+<div id="dash-container">
+    <!-- This is where your Dash app will be embedded -->
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.plot.ly/dash-latest.min.js"></script>
+
+<script>
+    // Add the following JavaScript code to embed your Dash app
+    const dashContainer = document.getElementById('dash-container');
+
+    // Embed Dash app
+    Plotly.d3.json('/_dash-layout', function(response) {
+        const layout = response.map(function(item) {
+            return item.props;
+        });
+
+        Plotly.d3.json('/_dash-dependencies', function(dependencies) {
+            Plotly.react(dashContainer, layout, dependencies);
+        });
+    });
+</script>
+</body>
+</html>
